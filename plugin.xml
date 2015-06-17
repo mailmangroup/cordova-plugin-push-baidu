@@ -90,4 +90,16 @@
     <source-file src="libs/pushservice-4.4.1.88.jar" target-dir="libs" />
   </platform>
 
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BaiduPush">
+                <param name="ios-package" value="BaiduPushPlugin"/>
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/BaiduPushPlugin.h" />
+        <source-file src="src/ios/BaiduPushPlugin.m" />
+
+    </platform>
 </plugin>
