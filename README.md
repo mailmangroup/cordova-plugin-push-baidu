@@ -1,6 +1,7 @@
 # cordova-qdc-baidu-push
 百度云推送cordova插件(Android版)
 
+-- 2015.06.17 基于百度IOS SDK【】集成
 -- 2015.06.15 基于百度Android SDK【L2-4.4.1】
 
 # 1. Android客户端安装
@@ -18,8 +19,11 @@
 	# 【com.qdc.plugins.baidu.push】是插件ID，不是插件文件夹名
 	$ionic plugin rm com.qdc.plugins.baidu.push
 
-## 1.2 Android开发环境导入--Eclipse
+## 1.1 Android开发环境导入--Eclipse
 导入路径：开发工程->platform->android
+
+## 1.2 IOS开发环境导入--Xcode
+导入路径：开发工程->platform->ios
 
 确认没有编译错误。
 
@@ -92,4 +96,4 @@ baidu_push.delTags
 
 1. 关于回调方法的参数json的type可以返回以下值，分别对应Android的Service的百度云推送回调方法
 onbind,onunbind,onsettags,ondeltags,onlisttags,onmessage,onnotificationclicked,onnotificationarrived
-	
+
