@@ -107,6 +107,9 @@
 
       <!-- Other required frameworks -->
       <framework src="libz.dylib" />
+      <framework src="Foundation.framework" />
+      <framework src="CoreTelephony.framework" />
+      <framework src="SystemConfiguration.framework" />
 
     </platform>
 </plugin>
