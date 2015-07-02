@@ -85,9 +85,9 @@
 
     <source-file src="src/android/BaiduPush.java" target-dir="src/com/qdc/plugins/baidu" />
     <source-file src="src/android/BaiduPushReceiver.java" target-dir="src/com/qdc/plugins/baidu" />
-    <source-file src="libs/armeabi/libbdpush_V2_2.so" target-dir="libs/armeabi" />
-    <source-file src="libs/mips/libbdpush_V2_2.so" target-dir="libs/mips" />
-    <source-file src="libs/pushservice-4.4.1.88.jar" target-dir="libs" />
+    <source-file src="libs/android/armeabi/libbdpush_V2_2.so" target-dir="libs/armeabi" />
+    <source-file src="libs/android/mips/libbdpush_V2_2.so" target-dir="libs/mips" />
+    <source-file src="libs/android/pushservice-4.4.1.88.jar" target-dir="libs" />
   </platform>
 
     <!-- ios -->
@@ -100,6 +100,13 @@
         
         <header-file src="src/ios/BaiduPushPlugin.h" />
         <source-file src="src/ios/BaiduPushPlugin.m" />
+
+      <!-- Wechat Official -->
+      <header-file src="libs/ios/BPush.h" />
+      <source-file src="libs/ios/libBPush.a" framework="true" />
+
+      <!-- Other required frameworks -->
+      <framework src="libz.dylib" />
 
     </platform>
 </plugin>
