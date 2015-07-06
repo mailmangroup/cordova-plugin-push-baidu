@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
-import com.ionicframework.ionic3735733.MainActivity;
+import __PACKAGE_NAME__;
 
 /**
  * 百度云推送Service
