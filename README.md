@@ -97,3 +97,16 @@ baidu_push.delTags
 1. 关于回调方法的参数json的type可以返回以下值，分别对应Android的Service的百度云推送回调方法
 onbind,onunbind,onsettags,ondeltags,onlisttags,onmessage,onnotificationclicked,onnotificationarrived
 
+2. 由于百度应用区分android与ios，APP端可以使用以下方法区分判断：
+
+```js
+function getOSType(){
+    var u = navigator.userAgent;
+    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+        return "android";
+    } else if (u.indexOf('iPhone') > -1) {
+        return "ios";
+    }
+}
+```
+
