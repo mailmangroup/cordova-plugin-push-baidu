@@ -22,6 +22,12 @@
 ## 1.1 Android开发环境导入--Eclipse
 导入路径：开发工程->platform->android
 
+打开AndroidManifest.xml文件，找到【application】节点，追加以下属性
+
+```xml
+ android:name="com.baidu.frontia.FrontiaApplication"
+```
+
 ## 1.2 IOS开发环境导入--Xcode
 导入路径：开发工程->platform->ios
 
