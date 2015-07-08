@@ -106,13 +106,7 @@ onbind,onunbind,onsettags,ondeltags,onlisttags,onmessage,onnotificationclicked,o
 2. 由于百度应用区分android与ios，APP端可以使用以下方法区分判断：
 
 ```js
-function getOSType(){
-    var u = navigator.userAgent;
-    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
-        return "android";
-    } else if (u.indexOf('iPhone') > -1) {
-        return "ios";
-    }
-}
+ionic.Platform.isIOS()
+ionic.Platform.isAndroid()
 ```
 
