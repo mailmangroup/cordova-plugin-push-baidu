@@ -27,6 +27,9 @@ public class BaiduPush extends CordovaPlugin {
 
 	/** JS回调接口对象 */
     public static CallbackContext pushCallbackContext = null;
+    public static CallbackContext onMessageCallbackContext = null;
+    public static CallbackContext onNotificationClickedCallbackContext = null;
+    public static CallbackContext onNotificationArrivedCallbackContext = null;
   
     /**
      * 插件初始化
@@ -46,16 +49,15 @@ public class BaiduPush extends CordovaPlugin {
     	LOG.d(LOG_TAG, "BaiduPush#execute");
 
     	boolean ret = false;
-    	
+        
         if ("startWork".equalsIgnoreCase(action)) {
             pushCallbackContext = callbackContext;
-
-            final String apiKey = args.getString(0);
-
+            
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
-
+            
+            final String apiKey = args.getString(0);
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	LOG.d(LOG_TAG, "PushManager#startWork");
@@ -66,11 +68,11 @@ public class BaiduPush extends CordovaPlugin {
             ret =  true;
         } else if ("stopWork".equalsIgnoreCase(action)) {
             pushCallbackContext = callbackContext;
-
+            
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
-
+            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	LOG.d(LOG_TAG, "PushManager#stopWork");
@@ -80,11 +82,11 @@ public class BaiduPush extends CordovaPlugin {
             ret =  true;
         } else if ("resumeWork".equalsIgnoreCase(action)) {
             pushCallbackContext = callbackContext;
-
+            
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
-
+            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	LOG.d(LOG_TAG, "PushManager#resumeWork");
@@ -94,11 +96,11 @@ public class BaiduPush extends CordovaPlugin {
             ret = true;
         } else if ("setTags".equalsIgnoreCase(action)) {
             pushCallbackContext = callbackContext;
-
+            
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
-
+            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	LOG.d(LOG_TAG, "PushManager#setTags");
@@ -123,12 +125,12 @@ public class BaiduPush extends CordovaPlugin {
             });
             ret = true;
         } else if ("delTags".equalsIgnoreCase(action)) {
-        	pushCallbackContext = callbackContext;
-
+            pushCallbackContext = callbackContext;
+            
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
-
+            
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                 	LOG.d(LOG_TAG, "PushManager#delTags");
@@ -151,6 +153,27 @@ public class BaiduPush extends CordovaPlugin {
                 	
                 }
             });
+            ret = true;
+        } else if ("onMessage".equalsIgnoreCase(action)) {
+            onMessageCallbackContext = callbackContext;
+            
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
+            ret = true;
+        } else if ("onNotificationClicked".equalsIgnoreCase(action)) {
+            onNotificationClickedCallbackContext = callbackContext;
+            
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
+            ret = true;
+        } else if ("onNotificationArrived".equalsIgnoreCase(action)) {
+            onNotificationArrivedCallbackContext = callbackContext;
+            
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
             ret = true;
         }
 
