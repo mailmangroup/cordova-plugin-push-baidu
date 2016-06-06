@@ -3,6 +3,7 @@ package com.qdc.plugins.baidu;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,6 +56,12 @@ public class BaiduPushReceiver extends PushMessageReceiver {
     	onNotificationArrived
     };
 
+
+    private static ArrayList<PluginResult> queuePushCallbackContext = new ArrayList<PluginResult>();
+    private static ArrayList<PluginResult> queueOnMessageCallbackContext = new ArrayList<PluginResult>();
+    private static ArrayList<PluginResult> queueOnNotificationClickedCallbackContext = new ArrayList<PluginResult>();
+    private static ArrayList<PluginResult> queueOnNotificationArrivedCallbackContext = new ArrayList<PluginResult>();
+
     /**
      * 调用PushManager.startWork后，sdk将对push
      * server发起绑定请求，这个过程是异步的。绑定请求的结果通过onBind返回。 如果您需要用单播推送，需要把这里获取的channel
@@ -86,11 +93,11 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setStringData(data, "channelId", channelId);
                 jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onBind);
-                sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendSuccessData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "透传消息为空");
-                sendErrorData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "绑定失败");
             }
         } catch (JSONException e) {
@@ -118,13 +125,13 @@ public class BaiduPushReceiver extends PushMessageReceiver {
             if (!TextUtils.isEmpty(customContentString)) {
                 setStringData(data, "message", message);
                 setStringData(data, "customContentString", customContentString);
-            jsonObject.put("data", data);
+                jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onMessage);
-                sendSuccessData(BaiduPush.onMessageCallbackContext, jsonObject, true);
+                sendSuccessData(queueOnMessageCallbackContext, BaiduPush.onMessageCallbackContext, jsonObject, true);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "透传消息为空");
-                sendErrorData(BaiduPush.onMessageCallbackContext, jsonObject, true);
+                sendErrorData(queueOnMessageCallbackContext, BaiduPush.onMessageCallbackContext, jsonObject, true);
                 Log.e(TAG, "透传消息为空");
             }
         } catch (JSONException e) {
@@ -154,13 +161,13 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setStringData(data, "title", title);
                 setStringData(data, "description", description);
                 setStringData(data, "customContentString", customContentString);
-            jsonObject.put("data", data);
+                jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onNotificationClicked);
-                sendSuccessData(BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
+                sendSuccessData(queueOnNotificationClickedCallbackContext, BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "推送的通知点击内容为空");
-                sendErrorData(BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
+                sendErrorData(queueOnNotificationClickedCallbackContext, BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
                 Log.e(TAG, "推送的通知点击内容为空");
             }
         } catch (JSONException e) {
@@ -193,11 +200,11 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setStringData(data, "customContentString", customContentString);
                 jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onNotificationArrived);
-                sendSuccessData(BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
+                sendSuccessData(queueOnNotificationArrivedCallbackContext, BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "推送的通知内容为空");
-                sendErrorData(BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
+                sendErrorData(queueOnNotificationArrivedCallbackContext, BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
                 Log.e(TAG, "推送的通知内容为空");
             }
         } catch (JSONException e) {
@@ -228,13 +235,13 @@ public class BaiduPushReceiver extends PushMessageReceiver {
             if (errorCode == 0) {
                 setArrayData(data, "sucessTags", sucessTags);
                 setArrayData(data, "failTags", failTags);
-            jsonObject.put("data", data);
+                jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onSetTags);
-                sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendSuccessData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "" + errorCode);
-                sendErrorData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "设置Tag失败");
             }
         } catch (JSONException e) {
@@ -267,11 +274,11 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setArrayData(data, "failTags", failTags);
                 jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onDelTags);
-                sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendSuccessData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
             } else {
                 setStringData(data, "errorCode", "" + errorCode);
-                sendErrorData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "设置Tag失败");
             }
         } catch (JSONException e) {
@@ -301,11 +308,11 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setArrayData(data, "tags", tags);
                 jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onListTags);
-                sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendSuccessData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
             } else {
                 setStringData(data, "errorCode", "" + errorCode);
-                sendErrorData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "listTags失败");
             }
         } catch (JSONException e) {
@@ -332,11 +339,11 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setStringData(data, "requestId", requestId);
                 jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onUnbind);
-                sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendSuccessData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
             } else {
                 setStringData(data, "errorCode", "" + errorCode);
-                sendErrorData(BaiduPush.pushCallbackContext, jsonObject, false);
+                sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "解绑定失败");
             }
         } catch (JSONException e) {
@@ -349,14 +356,12 @@ public class BaiduPushReceiver extends PushMessageReceiver {
      * 
      * @param jsonObject JSON对象
      */
-    private void sendSuccessData(CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
+    private void sendSuccessData(ArrayList<PluginResult> queue, CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
         Log.d(TAG, "BaiduPushReceiver#sendSuccessData: " + (jsonObject != null ? jsonObject.toString() : "null"));
 
-        if (callbackContext != null) {
-            PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObject);
-            result.setKeepCallback(isCallBackKeep);
-            callbackContext.sendPluginResult(result);
-        }
+        PluginResult result = new PluginResult(PluginResult.Status.OK, jsonObject);
+        result.setKeepCallback(isCallBackKeep);
+        sendResultWithQueue(queue, callbackContext, result);
     }
     
     /**
@@ -364,13 +369,34 @@ public class BaiduPushReceiver extends PushMessageReceiver {
      * 
      * @param jsonObject JSON对象
      */
-    private void sendErrorData(CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
+    private void sendErrorData(ArrayList<PluginResult> queue, CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
         Log.d(TAG, "BaiduPushReceiver#sendErrorData: " + (jsonObject != null ? jsonObject.toString() : "null"));
 
-        if (callbackContext != null) {
-            PluginResult result = new PluginResult(PluginResult.Status.ERROR, jsonObject);
-            result.setKeepCallback(false);
+        PluginResult result = new PluginResult(PluginResult.Status.ERROR, jsonObject);
+        result.setKeepCallback(false);
+        sendResultWithQueue(queue, callbackContext, result);
+    }
+
+    private void sendResultWithQueue(ArrayList<PluginResult> queue, CallbackContext callbackContext, PluginResult result) {
+        if (callbackContext == null) {
+            Log.d(TAG, "BaiduPushReceiver#sendResultWithQueue: callbackContext IS NULL");
+            queue.add(result);
+        }
+        else {
             callbackContext.sendPluginResult(result);
+            sendQueue(queuePushCallbackContext, BaiduPush.pushCallbackContext);
+            sendQueue(queueOnNotificationArrivedCallbackContext, BaiduPush.onNotificationArrivedCallbackContext);
+            sendQueue(queueOnMessageCallbackContext, BaiduPush.onMessageCallbackContext);
+            sendQueue(queueOnNotificationClickedCallbackContext, BaiduPush.onNotificationClickedCallbackContext);
+        }
+    }
+
+    private void sendQueue(ArrayList<PluginResult> queue, CallbackContext callbackContext) {
+        if (callbackContext != null) {
+            for (PluginResult result : queue) {
+                callbackContext.sendPluginResult(result);
+            }
+            queue.clear();
         }
     }
 

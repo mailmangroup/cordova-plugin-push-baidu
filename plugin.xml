@@ -38,11 +38,6 @@
       <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     </config-file>
 
-    <!--<config-file target="AndroidManifest.xml" parent="/manifest/*">
-      <application android:name="com.baidu.frontia.FrontiaApplication" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name" android:supportsRtl="true">
-      </application>
-    </config-file>-->
-
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
 
       <!-- push service start -->
@@ -111,7 +106,7 @@
                 <param name="ios-package" value="BaiduPushPlugin"/>
             </feature>
         </config-file>
-        
+
         <header-file src="src/ios/BaiduPushPlugin.h" />
         <source-file src="src/ios/BaiduPushPlugin.m" />
 
