@@ -248,7 +248,7 @@ public class BaiduPushReceiver extends FrontiaPushMessageReceiver {
 
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setClass(context, MainActivity.class);
         intent.putExtra(PushConstants.EXTRA_NOTIFICATION_TITLE, title);
         intent.putExtra(PushConstants.EXTRA_NOTIFICATION_CONTENT, customContentString);
