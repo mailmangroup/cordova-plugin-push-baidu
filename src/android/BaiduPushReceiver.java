@@ -81,10 +81,10 @@ public class BaiduPushReceiver extends PushMessageReceiver {
             JSONObject jsonObject = new JSONObject();
             JSONObject data = new JSONObject();
             if (errorCode == 0) {
-            setStringData(data, "appId", appId);
-            setStringData(data, "userId", userId);
-            setStringData(data, "channelId", channelId);
-            jsonObject.put("data", data);
+                setStringData(data, "appId", appId);
+                setStringData(data, "userId", userId);
+                setStringData(data, "channelId", channelId);
+                jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onBind);
                 sendSuccessData(BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.d(TAG, jsonObject.toString());
@@ -191,9 +191,9 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 setStringData(data, "title", title);
                 setStringData(data, "description", description);
                 setStringData(data, "customContentString", customContentString);
-            jsonObject.put("data", data);
+                jsonObject.put("data", data);
                 jsonObject.put("type", CB_TYPE.onNotificationArrived);
-                sendErrorData(BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
+                sendSuccessData(BaiduPush.onNotificationArrivedCallbackContext, jsonObject, true);
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "推送的通知内容为空");
