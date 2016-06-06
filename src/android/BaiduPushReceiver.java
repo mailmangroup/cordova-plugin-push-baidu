@@ -1,4 +1,4 @@
-package com.roadshr.plugins.baidu;
+package com.qdc.plugins.baidu;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
