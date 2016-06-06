@@ -1,24 +1,29 @@
 var exec = require('cordova/exec');
 
 var baidu_push = {
-  registered: false,
-  startWork: function(api_key, successCallback) {
-    exec(successCallback, baidu_push.failureFn, 'BaiduPush', 'startWork', [api_key]);
+  onMessage: function(successCallback, failureCallback){
+      exec(successCallback, failureCallback, 'BaiduPush', 'onMessage', []);
   },
-  stopWork: function(successCallback) {
-    exec(successCallback, baidu_push.failureFn, 'BaiduPush', 'stopWork', []);
+  onNotificationClicked: function(successCallback, failureCallback){
+      exec(successCallback, failureCallback, 'BaiduPush', 'onNotificationClicked', []);
   },
-  resumeWork: function(successCallback) {
-    exec(successCallback, baidu_push.failureFn, 'BaiduPush', 'resumeWork');
+  onNotificationArrived: function(successCallback, failureCallback){
+      exec(successCallback, failureCallback, 'BaiduPush', 'onNotificationArrived', []);
   },
-  setTags: function(tags, successCallback) {
-    exec(successCallback, baidu_push.failureFn, 'BaiduPush', 'setTags', tags);
+  startWork: function(api_key, successCallback, failureCallback) {
+    exec(successCallback, failureCallback, 'BaiduPush', 'startWork', [api_key]);
   },
-  delTags: function(tags, successCallback) {
-    exec(successCallback, baidu_push.failureFn, 'BaiduPush', 'delTags', tags);
+  stopWork: function(successCallback, failureCallback) {
+    exec(successCallback, failureCallback, 'BaiduPush', 'stopWork', []);
   },
-  failureFn: function() {
-    console.log('fail to register push');
+  resumeWork: function(successCallback, failureCallback) {
+    exec(successCallback, failureCallback, 'BaiduPush', 'resumeWork');
+  },
+  setTags: function(tags, successCallback, failureCallback) {
+    exec(successCallback, failureCallback, 'BaiduPush', 'setTags', tags);
+  },
+  delTags: function(tags, successCallback, failureCallback) {
+    exec(successCallback, failureCallback, 'BaiduPush', 'delTags', tags);
   }
 }
 
