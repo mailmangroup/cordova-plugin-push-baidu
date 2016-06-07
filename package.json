@@ -1,0 +1,34 @@
+{
+  "name": "cordova-plugin-push-baidu",
+  "version": "1.0.1",
+  "description": "Baidu push notification plugin for cordova",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "cordova": {
+    "id": "cordova-plugin-push-baidu",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "push",
+    "notification",
+    "baidu",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ti-webdev/cordova-plugin-push-baidu.git"
+  },
+  "author": "Ti-webdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ti-webdev/cordova-plugin-push-baidu/issues"
+  },
+  "homepage": "https://github.com/Ti-webdev/cordova-plugin-push-baidu#readme"
+}

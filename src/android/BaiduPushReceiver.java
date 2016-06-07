@@ -1,4 +1,4 @@
-package com.qdc.plugins.baidu;
+package com.cordova.plugins.push.baidu;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

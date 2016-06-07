@@ -22,7 +22,7 @@ module.exports = function (context) {
         return ;
     }
 
-    var targetDir  = path.join(projectRoot, "platforms", "android", "src", "com.qdc.plugins.baidu".replace(/\./g, path.sep));
+    var targetDir  = path.join(projectRoot, "platforms", "android", "src", "com.cordova.plugins.push.baidu".replace(/\./g, path.sep));
         targetFile = path.join(targetDir, "BaiduPushReceiver.java");
 
     if (['after_plugin_add', 'after_plugin_install', 'after_platform_add'].indexOf(context.hook) === -1) {

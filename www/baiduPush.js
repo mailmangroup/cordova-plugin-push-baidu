@@ -1,6 +1,6 @@
 var exec = require('cordova/exec');
 
-var baidu_push = {
+var baiduPush = {
   onMessage: function(successCallback, failureCallback){
       exec(successCallback, failureCallback, 'BaiduPush', 'onMessage', []);
   },
@@ -27,4 +27,4 @@ var baidu_push = {
   }
 }
 
-module.exports = baidu_push;
+module.exports = baiduPush;
