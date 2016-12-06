@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-push-baidu"
-  version="1.0.1">
+  version="5.3.0">
   <name>BaiduPush</name>
 
   <js-module src="www/baiduPush.js" name="baiduPush">
@@ -89,14 +89,14 @@
 
     <source-file src="src/android/BaiduPush.java" target-dir="src/com/cordova/plugins/push/baidu" />
     <source-file src="src/android/BaiduPushReceiver.java" target-dir="src/com/cordova/plugins/push/baidu" />
-    <source-file src="libs/android/arm64-v8a/libbdpush_V2_6.so" target-dir="libs/arm64-v8a" />
-    <source-file src="libs/android/armeabi/libbdpush_V2_6.so" target-dir="libs/armeabi" />
-    <source-file src="libs/android/armeabi-v7a/libbdpush_V2_6.so" target-dir="libs/armeabi-v7a" />
-    <source-file src="libs/android/mips/libbdpush_V2_6.so" target-dir="libs/mips" />
-    <source-file src="libs/android/mips64/libbdpush_V2_6.so" target-dir="libs/mips64" />
-    <source-file src="libs/android/x86/libbdpush_V2_6.so" target-dir="libs/x86" />
-    <source-file src="libs/android/x86_64/libbdpush_V2_6.so" target-dir="libs/x86_64" />
-    <source-file src="libs/android/pushservice-5.0.0.66.jar" target-dir="libs" />
+    <source-file src="libs/android/arm64-v8a/libbdpush_V2_7.so" target-dir="libs/arm64-v8a" />
+    <source-file src="libs/android/armeabi/libbdpush_V2_7.so" target-dir="libs/armeabi" />
+    <source-file src="libs/android/armeabi-v7a/libbdpush_V2_7.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="libs/android/mips/libbdpush_V2_7.so" target-dir="libs/mips" />
+    <source-file src="libs/android/mips64/libbdpush_V2_7.so" target-dir="libs/mips64" />
+    <source-file src="libs/android/x86/libbdpush_V2_7.so" target-dir="libs/x86" />
+    <source-file src="libs/android/x86_64/libbdpush_V2_7.so" target-dir="libs/x86_64" />
+    <source-file src="libs/android/pushservice-5.3.0.99.jar" target-dir="libs" />
   </platform>
 
     <!-- ios -->
