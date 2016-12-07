@@ -39,7 +39,7 @@ import com.baidu.android.pushservice.PushMessageReceiver;
  * 当您遇到以上返回错误时，如果解释不了您的问题，请用同一请求的返回值requestId和errorCode联系我们追查问题。
  *
  */
-    
+
 public class BaiduPushReceiver extends PushMessageReceiver {
     /** TAG to Log */
     public static final String TAG = BaiduPushReceiver.class
@@ -97,8 +97,10 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 Log.d(TAG, jsonObject.toString());
             }else{
                 setStringData(data, "errorCode", "透传消息为空");
+                jsonObject.put("code", errorCode);
                 sendErrorData(queuePushCallbackContext, BaiduPush.pushCallbackContext, jsonObject, false);
                 Log.e(TAG, "绑定失败");
+                Log.e(TAG, "errorCode: " + errorCode);
             }
         } catch (JSONException e) {
             Log.e(TAG, e.getMessage(), e);
@@ -353,7 +355,7 @@ public class BaiduPushReceiver extends PushMessageReceiver {
 
     /**
      * 接收推送成功内容并返回给前端JS
-     * 
+     *
      * @param jsonObject JSON对象
      */
     private void sendSuccessData(ArrayList<PluginResult> queue, CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
@@ -363,10 +365,10 @@ public class BaiduPushReceiver extends PushMessageReceiver {
         result.setKeepCallback(isCallBackKeep);
         sendResultWithQueue(queue, callbackContext, result);
     }
-    
+
     /**
      * 接收推送失败内容并返回给前端JS
-     * 
+     *
      * @param jsonObject JSON对象
      */
     private void sendErrorData(ArrayList<PluginResult> queue, CallbackContext callbackContext, JSONObject jsonObject, boolean isCallBackKeep) {
@@ -402,7 +404,7 @@ public class BaiduPushReceiver extends PushMessageReceiver {
 
     /**
      * 设定字符串类型JSON对象，如值为空时不设定
-     * 
+     *
      * @param jsonObject JSON对象
      * @param name 关键字
      * @param value 值
@@ -413,10 +415,10 @@ public class BaiduPushReceiver extends PushMessageReceiver {
     		jsonObject.put(name, value);
     	}
     }
-    
+
     /**
      * 设定Array类型JSON对象，如值为空时不设定
-     * 
+     *
      * @param jsonObject JSON对象
      * @param name 关键字
      * @param value 值

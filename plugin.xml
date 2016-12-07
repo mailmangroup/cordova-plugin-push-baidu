@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-push-baidu"
-  version="5.3.0">
+  version="5.3.1000">
   <name>BaiduPush</name>
 
   <js-module src="www/baiduPush.js" name="baiduPush">
@@ -31,11 +31,12 @@
       <uses-permission android:name="android.permission.WRITE_SETTINGS" />
       <uses-permission android:name="android.permission.VIBRATE" />
       <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+      <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
       <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
       <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-      <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
       <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+      <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
@@ -85,6 +86,12 @@
           <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
         </intent-filter>
       </receiver>
+      <provider
+        android:name="com.baidu.android.pushservice.PushInfoProvider"
+        android:authorities="$PACKAGE_NAME.bdpush"
+        android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.$PACKAGE_NAME"
+        android:protectionLevel = "signature"
+        android:exported="true" />
     </config-file>
 
     <source-file src="src/android/BaiduPush.java" target-dir="src/com/cordova/plugins/push/baidu" />
