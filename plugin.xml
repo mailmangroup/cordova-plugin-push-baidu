@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-push-baidu"
-  version="5.5.0">
+  version="5.6.0">
   <name>BaiduPush</name>
 
   <js-module src="www/baiduPush.js" name="baiduPush">
@@ -103,7 +103,7 @@
     <source-file src="libs/android/mips64/libbdpush_V2_7.so" target-dir="libs/mips64" />
     <source-file src="libs/android/x86/libbdpush_V2_7.so" target-dir="libs/x86" />
     <source-file src="libs/android/x86_64/libbdpush_V2_7.so" target-dir="libs/x86_64" />
-    <source-file src="libs/android/pushservice-5.5.0.50.jar" target-dir="libs" />
+    <source-file src="libs/android/pushservice-5.6.0.30.jar" target-dir="libs" />
   </platform>
 
     <!-- ios -->
