@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-push-baidu",
-  "version": "5.6.1",
+  "version": "6.5.0",
   "description": "Baidu push notification plugin for cordova",
   "main": "index.js",
   "scripts": {

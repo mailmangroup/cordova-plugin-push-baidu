@@ -1,5 +1,6 @@
 # cordova-plugin-baidu-push
 
+-- 2019.02.18 Updated Android SDK 6.5.0.75 
 -- 2017.02.17 Updated Android SDK 5.6.0.30  
 -- 2016.06.06 Updated iOS SDK 1.4.5, Android 5.0.0  
 -- 2015.06.17 IOS SDK  
