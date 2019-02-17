@@ -167,6 +167,13 @@ public class BaiduPushReceiver extends PushMessageReceiver {
                 jsonObject.put("type", CB_TYPE.onNotificationClicked);
                 sendSuccessData(queueOnNotificationClickedCallbackContext, BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
                 Log.d(TAG, jsonObject.toString());
+
+                Log.d(TAG, " *** Start activity begins");
+                Intent intent = new Intent();
+                intent.setClassName(context.getPackageName(), context.getPackageName() + ".MainActivity");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(intent);
+                Log.d(TAG, " *** Start activity done");
             }else{
                 setStringData(data, "errorCode", "推送的通知点击内容为空");
                 sendErrorData(queueOnNotificationClickedCallbackContext, BaiduPush.onNotificationClickedCallbackContext, jsonObject, true);
