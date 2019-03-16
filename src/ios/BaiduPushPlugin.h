@@ -11,6 +11,9 @@
 
 @interface BaiduPushPlugin : CDVPlugin
 @property (nonatomic) CDVPluginResult *result;
+@property (nonatomic, copy) NSString *appkey;
+
+- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 
 /*!
  @method

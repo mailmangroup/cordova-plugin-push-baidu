@@ -111,6 +111,8 @@
 
         <header-file src="src/ios/BaiduPushPlugin.h" />
         <source-file src="src/ios/BaiduPushPlugin.m" />
+        <header-file src="src/ios/AppDelegate+BaiduPushPlugin.h" />
+        <source-file src="src/ios/AppDelegate+BaiduPushPlugin.m" />
 
       <!-- Wechat Official -->
       <header-file src="libs/ios/BPush.h" />

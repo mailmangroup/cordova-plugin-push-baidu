@@ -8,9 +8,34 @@
 
 #import "BaiduPushPlugin.h"
 #import "BPush.h"
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 @implementation BaiduPushPlugin{
     NSNotificationCenter *_observer;
+}
+
+@synthesize appkey;
+
+- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:deviceToken];
+//    [BPush registerDeviceToken:deviceToken];
+//    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+//        // 绑定返回值
+//        if ([self returnBaiduResult:result])
+//        {
+//#warning TODO result中的user id、channel id可以在这个时候发送给server
+//
+//            self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+//        }
+//        else{
+//            self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+//        }
+////        [[NSNotificationCenter defaultCenter] removeObserver:_obsexrver];
+////        [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
+//        [self.commandDelegate sendPluginResult:self.result callbackId:nil];
+//    }];
 }
 
 /*!
@@ -19,7 +44,15 @@
  */
 - (void)startWork:(CDVInvokedUrlCommand*)command{
     NSLog(@"绑定");
+
+    self.appkey = [command.arguments objectAtIndex:0];
+
+    // 在 App 启动时注册百度云推送服务，需要提供 Apikey
+    [BPush registerChannel:nil apiKey:self.appkey pushMode:BPushModeProduction withFirstAction:nil withSecondAction:nil withCategory:nil useBehaviorTextInput:YES isDebug:NO];
     
+    // 禁用地理位置推送 需要再绑定接口前调用。
+    [BPush disableLbs];
+
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:CDVRemoteNotification
                   object:nil
                   queue:[NSOperationQueue mainQueue]
@@ -32,16 +65,34 @@
                           {
                               #warning TODO result中的user id、channel id可以在这个时候发送给server
                               
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
                           }
                           else{
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:result];
                           }
                           [[NSNotificationCenter defaultCenter] removeObserver:_observer];
                           [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
                       }];
                   }];
     
+    // iOS10 下需要使用新的 API
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge)
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                  // Enable or disable features based on authorization.
+                                  if (granted) {
+//                                      [application registerForRemoteNotifications];
+                                      dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                          [[UIApplication sharedApplication] registerForRemoteNotifications];
+                                      });
+                                  }
+                              }];
+#endif
+    }
+    else
     // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
