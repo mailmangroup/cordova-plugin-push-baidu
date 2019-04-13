@@ -53,26 +53,35 @@
     // 禁用地理位置推送 需要再绑定接口前调用。
     [BPush disableLbs];
 
-    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:CDVRemoteNotification
+        _observer = [[NSNotificationCenter defaultCenter] addObserverForName:CDVRemoteNotification
                   object:nil
                   queue:[NSOperationQueue mainQueue]
                   usingBlock:^(NSNotification *note) {
                       NSData *deviceToken = [note object];
-                      [BPush registerDeviceToken:deviceToken];
-                      [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
-                          // 绑定返回值
-                          if ([self returnBaiduResult:result])
-                          {
-                              #warning TODO result中的user id、channel id可以在这个时候发送给server
-                              
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
-                          }
-                          else{
-                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:result];
-                          }
-                          [[NSNotificationCenter defaultCenter] removeObserver:_observer];
-                          [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
-                      }];
+                      NSMutableDictionary *dict = [NSMutableDictionary new];
+                      [dict setObject:[deviceToken description] forKey:@"deviceToken"];
+                      self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
+                      [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+                      [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
+                      
+//                      [BPush registerDeviceToken:deviceToken];
+//                      [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+//                          NSLog(@"%@", NSStringFromClass([result class]));
+//                          NSMutableDictionary *dict = [result mutableCopy];
+//                          [dict setObject:[deviceToken description] forKey:@"deviceToken"];
+//                          // 绑定返回值
+//                          if ([self returnBaiduResult:result])
+//                          {
+//                              #warning TODO result中的user id、channel id可以在这个时候发送给server
+//
+//                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
+//                          }
+//                          else{
+//                              self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dict];
+//                          }
+//                          [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+//                          [self.commandDelegate sendPluginResult:self.result callbackId:command.callbackId];
+//                      }];
                   }];
     
     // iOS10 下需要使用新的 API
