@@ -98,7 +98,7 @@
     <source-file src="libs/android/mips64/libbdpush_V2_9.so" target-dir="libs/mips64" />
     <source-file src="libs/android/x86/libbdpush_V2_9.so" target-dir="libs/x86" />
     <source-file src="libs/android/x86_64/libbdpush_V2_9.so" target-dir="libs/x86_64" />
-    <source-file src="libs/android/pushservice-6.5.0.75.jar" target-dir="libs" />
+    <source-file src="libs/android/pushservice-6.7.3.20.jar" target-dir="libs" />
   </platform>
 
     <!-- ios -->
